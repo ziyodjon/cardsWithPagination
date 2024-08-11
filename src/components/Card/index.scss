@@ -1,0 +1,6 @@
+.card {
+  @apply border border-[#ccc] rounded-[10px] py-[15px] px-[15px];
+  &-title {
+    @apply text-[25px] font-bold text-black;
+  }
+}
