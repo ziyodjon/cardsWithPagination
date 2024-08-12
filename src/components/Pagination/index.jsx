@@ -1,23 +1,59 @@
 import React from "react";
 import "./index.scss";
+import { useState } from "react";
 import clsx from "clsx";
 
-const Pagination = ({ currentPage, totalPages, onPageChange }) => {
-  const pages = [];
+const Pagination = ({ totalPages, currentPage, onPageChange }) => {
+  const [pageLimit, setPageLimit] = useState(5); // Количество отображаемых страниц
 
-  for (let i = 1; i <= totalPages; i++) {
-    pages.push(
+  const getPages = () => {
+    const pages = [];
+    let startPage = Math.max(1, currentPage - Math.floor(pageLimit / 2));
+    let endPage = Math.min(totalPages, startPage + pageLimit - 1);
+
+    if (endPage - startPage + 1 < pageLimit) {
+      startPage = Math.max(1, endPage - pageLimit + 1);
+    }
+
+    for (let i = startPage; i <= endPage; i++) {
+      pages.push(i);
+    }
+
+    return pages;
+  };
+
+  return (
+    <div className="pagination">
       <button
-        key={i}
-        onClick={() => onPageChange(i)}
-        className={clsx(currentPage === i ? "active" : "", "pagination-number")}
+        onClick={() => onPageChange(currentPage - 1)}
+        disabled={currentPage === 1}
+        className="pagination-previous-btn"
       >
-        {i}
+        Предыдущий
       </button>
-    );
-  }
 
-  return <div className="pagination">{pages}</div>;
+      {getPages().map((page) => (
+        <button
+          key={page}
+          onClick={() => onPageChange(page)}
+          className={clsx(
+            page === currentPage ? "active" : "",
+            "pagination-number"
+          )}
+        >
+          {page}
+        </button>
+      ))}
+
+      <button
+        onClick={() => onPageChange(currentPage + 1)}
+        disabled={currentPage === totalPages}
+        className="pagination-next-btn"
+      >
+        Следующий
+      </button>
+    </div>
+  );
 };
 
 export default Pagination;
