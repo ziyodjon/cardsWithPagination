@@ -1,4 +1,6 @@
 .pagination {
+  @apply bg-[#ccc] border border-[#ccc] rounded-[5px] p-5 flex flex-wrap gap-5 my-[40px];
+
   @mixin all-buttons-style {
     @apply border border-gray-500 bg-[#e9e7e7] px-[10px] py-[5px] rounded-[5px];
   }
@@ -10,7 +12,6 @@
     @include all-buttons-style();
   }
   &-number {
-    @apply border border-gray-500 bg-[#e9e7e7] px-[10px] py-[5px] rounded-[5px];
+    @include all-buttons-style();
   }
-  @apply bg-[#ccc] border border-[#ccc] rounded-[5px] p-5 flex flex-wrap gap-5 my-[40px];
 }

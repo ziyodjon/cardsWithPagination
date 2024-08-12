@@ -7,8 +7,8 @@
   &-image {
     img {
       height: 100%;
-      object-fit: cover;
+      object-fit: contain;
     }
-    @apply h-[40%] overflow-hidden;
+    @apply h-[50%] overflow-hidden;
   }
 }
